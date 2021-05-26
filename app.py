@@ -70,7 +70,8 @@ def stations():
     # Connect to database
     session = Session(engine)
 
-    
+    station_query = session.query(Station.station, Station.name).all()
+    stations_list = {name: station for name, station in station_query}
 
     # Disconnect from database
     session.close()
@@ -85,7 +86,8 @@ def tobs():
     # Connect to database
     session = Session(engine)
 
-    # YOUR JOB: DEFINE THE tobs_data VARIABLE
+    tobs_query = session.query(Measurement.tobs, Measurement.date).filter_by(station = 'USC00519281').all()
+    tabs_data = tobs_query.loc['2016-08-18':'2017-08-18']
 
     # Disconnect from database
     session.close()
